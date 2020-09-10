@@ -18,6 +18,10 @@ class Category extends Model
         'deleted_at'
     ];
 
+    public $casts = [
+        'is_active' => 'boolean'
+    ];
+
     public $incrementing = false;
 
     public $keyType = 'string';
