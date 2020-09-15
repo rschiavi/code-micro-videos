@@ -14,7 +14,7 @@ class CategoryTest extends TestCase
 
     public function testList()
     {
-        factory(Category::class, 1)->create();
+        factory(Category::class)->create();
         $categories = Category::all();
         $this->assertCount(1, $categories);
         $categoryKey = array_keys($categories->first()->getAttributes());
@@ -73,15 +73,15 @@ class CategoryTest extends TestCase
         $category = factory(Category::class)->create([
             'description' => 'test_description',
             'is_active' => false
-        ])->first();
+        ]);
 
         $data = [
             'name' => '',
             'description' => '',
             'is_active' => false
         ];
-        $category->update($data);
 
+        $category->update($data);
         foreach ($data as $key => $value) {
             $this->assertEquals($value, $category->{$key});
         }
@@ -89,7 +89,7 @@ class CategoryTest extends TestCase
 
     public function testDelete()
     {
-        $category = factory(Category::class)->create()->first();
+        $category = factory(Category::class)->create();
         $category->delete();
         $this->assertSoftDeleted($category);
     }
