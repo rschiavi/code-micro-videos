@@ -11,21 +11,25 @@ RUN usermod -u 1000 www-data
 
 WORKDIR /var/www
 
-RUN rm -rf /var/www/html && ln -s public html
-
-USER www-data
+RUN rm -rf html && ln -s public html
 
 EXPOSE 9000
 
+
+FROM base as cloudbuild
+
+USER www-data
+
+ENTRYPOINT [ "php-fpm" ]
+
+
 FROM base as dev
-USER root
+
 ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-ADD .docker/app/.env /templates/.env
-ADD .docker/app/.env.testing /templates/.env.testing
 ADD .docker/app/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
