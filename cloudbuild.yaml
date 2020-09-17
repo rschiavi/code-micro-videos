@@ -1,0 +1,33 @@
+steps:
+
+  - id: "Executando docker-compose"
+    name: 'docker/compose'
+    args: ['-f', 'docker-compose.cloudbuild.yaml', 'up', '-d']
+
+  - id: "Chown in /var/www"
+    name: 'docker'
+    args: ['exec', '-u', 'root', '-t', 'micro-videos-app', 'chown', '-R', 'www-data:www-data', '/var/www']
+
+  - id: "Executando composer"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'composer', 'install']
+
+  - id: "Copiando .env"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'cp', '.env.example', '.env']
+
+  - id: "Copiando .env.testing"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'cp', '.env.testing.example', '.env.testing']
+
+  - id: "Rodando key:generate"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'php', 'artisan', 'key:generate']
+
+  - id: "Executando migrations"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'php', 'artisan', 'migrate']
+
+  - id: "Executando phpunit"
+    name: 'docker'
+    args: ['exec', '-t', 'micro-videos-app', 'php', 'vendor/bin/phpunit', '-c', 'phpunit.xml']
