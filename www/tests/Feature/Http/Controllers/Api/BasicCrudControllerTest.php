@@ -67,10 +67,7 @@ class BasicCrudControllerTest extends TestCase
 
     public function testIfFindOrFailFetchModel()
     {
-        $category = CategoryStub::create([
-            'name' => 'test_name',
-            'description' => 'test_description'
-        ]);
+        $category = CategoryStub::create(['name' => 'test_name', 'description' => 'test_description']);
         $reflectionClass = new ReflectionClass(BasicCrudController::class);
         $reflectionMethod = $reflectionClass->getMethod('findOrFail');
         $reflectionMethod->setAccessible(true);
@@ -90,14 +87,33 @@ class BasicCrudControllerTest extends TestCase
 
     public function testShow()
     {
-        $category = CategoryStub::create([
-            'name' => 'test_name',
-            'description' => 'test_description'
-        ]);
+        $category = CategoryStub::create(['name' => 'test_name', 'description' => 'test_description']);
         $obj = $this->controller->show($category->id);
         $this->assertEquals(
             CategoryStub::find(1)->toArray(),
             $obj->toArray()
         );
+    }
+
+    public function testUpdate()
+    {
+        $category = CategoryStub::create(['name' => 'test_name', 'description' => 'test_description']);
+        $request = Mockery::mock(Request::class);
+        $request
+            ->shouldReceive('all')
+            ->once()
+            ->andReturn(['name' => 'test_name_2', 'description' => 'test_description_2']);
+        $obj = $this->controller->update($request, $category->id);
+        $this->assertEquals(
+            CategoryStub::find(1)->toArray(),
+            $obj->toArray()
+        );
+    }
+
+    public function testDestroy()
+    {
+        $category = CategoryStub::create(['name' => 'test_name', 'description' => 'test_description']);
+        $this->controller->destroy($category->id);
+        $this->assertNull(CategoryStub::find($category->id));
     }
 }
