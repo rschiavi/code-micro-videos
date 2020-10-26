@@ -113,7 +113,10 @@ class BasicCrudControllerTest extends TestCase
     public function testDestroy()
     {
         $category = CategoryStub::create(['name' => 'test_name', 'description' => 'test_description']);
-        $this->controller->destroy($category->id);
+        $response = $this->controller->destroy($category->id);
+        $this
+            ->createTestResponse($response)
+            ->assertStatus(204);
         $this->assertNull(CategoryStub::find($category->id));
     }
 }

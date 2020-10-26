@@ -10,12 +10,19 @@ class CastMember extends Model
 {
     use SoftDeletes, Uuid;
 
+    const TYPE_DIRECTOR = 1;
+    const TYPE_ACTOR = 2;
+
     public $fillable = [
         'name', 'type'
     ];
 
     public $dates = [
         'deleted_at'
+    ];
+
+    public $casts = [
+        'type' => 'integer'
     ];
 
     public $incrementing = false;
