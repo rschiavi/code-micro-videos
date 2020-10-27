@@ -102,11 +102,11 @@ class BasicCrudControllerTest extends TestCase
         $request
             ->shouldReceive('all')
             ->once()
-            ->andReturn(['name' => 'test_name_2', 'description' => 'test_description_2']);
-        $obj = $this->controller->update($request, $category->id);
+            ->andReturn(['name' => 'test_changed', 'description' => 'test_description_changed']);
+        $result = $this->controller->update($request, $category->id);
         $this->assertEquals(
             CategoryStub::find(1)->toArray(),
-            $obj->toArray()
+            $result->toArray()
         );
     }
 

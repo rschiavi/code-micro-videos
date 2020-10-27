@@ -74,9 +74,6 @@ class GenreControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $this->genre = factory(Genre::class)->create([
-            'is_active' => false
-        ]);
         $data = [
             'name' => 'test',
             'is_active' => true
@@ -85,7 +82,7 @@ class GenreControllerTest extends TestCase
         $response->assertJsonStructure(['created_at', 'updated_at']);
     }
 
-    public function testDelete()
+    public function testDestroy()
     {
         $response = $this->json(
             'DELETE',

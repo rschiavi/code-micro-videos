@@ -89,7 +89,7 @@ class CastMemberControllerTest extends TestCase
         $response->assertJsonStructure(['created_at', 'updated_at']);
     }
 
-    public function testDelete()
+    public function testDestroy()
     {
         $response = $this->json(
             'DELETE',

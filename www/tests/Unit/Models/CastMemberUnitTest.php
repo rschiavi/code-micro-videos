@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 use ReflectionClass;
 
-class CastMemberTest extends TestCase
+class CastMemberUnitTest extends TestCase
 {
     private $castMember;
 

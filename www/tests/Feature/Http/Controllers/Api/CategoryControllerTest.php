@@ -75,10 +75,6 @@ class CategoryControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $this->category = factory(Category::class)->create([
-            'description' => 'description',
-            'is_active' => false
-        ]);
         $data = [
             'name' => 'test',
             'description' => 'description',
@@ -100,7 +96,7 @@ class CategoryControllerTest extends TestCase
         $response = $this->assertUpdate($data, $data);
     }
 
-    public function testDelete()
+    public function testDestroy()
     {
         $response = $this->json(
             'DELETE',
