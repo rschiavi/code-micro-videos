@@ -30,14 +30,6 @@ class CastMemberControllerTest extends TestCase
             ->assertJson([$this->castMember->toArray()]);
     }
 
-    public function testShow()
-    {
-        $response = $this->get(route('cast_members.show', ['cast_member' => $this->castMember->id]));
-        $response
-            ->assertStatus(200)
-            ->assertJson($this->castMember->toArray());
-    }
-
     public function testInvalidationData()
     {
         $data = [
@@ -77,6 +69,14 @@ class CastMemberControllerTest extends TestCase
             $response = $this->assertStore($value, $value + ['deleted_at' => null]);
             $response->assertJsonStructure(['created_at', 'updated_at']);
         }
+    }
+
+    public function testShow()
+    {
+        $response = $this->get(route('cast_members.show', ['cast_member' => $this->castMember->id]));
+        $response
+            ->assertStatus(200)
+            ->assertJson($this->castMember->toArray());
     }
 
     public function testUpdate()

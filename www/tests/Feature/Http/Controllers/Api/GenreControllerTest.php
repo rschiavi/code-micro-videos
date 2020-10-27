@@ -28,14 +28,6 @@ class GenreControllerTest extends TestCase
             ->assertJson([$this->genre->toArray()]);
     }
 
-    public function testShow()
-    {
-        $response = $this->get(route('genres.show', ['genre' => $this->genre->id]));
-        $response
-            ->assertStatus(200)
-            ->assertJson($this->genre->toArray());
-    }
-
     public function testInvalidationData()
     {
         $data = [
@@ -70,6 +62,14 @@ class GenreControllerTest extends TestCase
             'is_active' => false
         ];
         $this->assertStore($data, $data + ['is_active' => false]);
+    }
+
+    public function testShow()
+    {
+        $response = $this->get(route('genres.show', ['genre' => $this->genre->id]));
+        $response
+            ->assertStatus(200)
+            ->assertJson($this->genre->toArray());
     }
 
     public function testUpdate()

@@ -28,14 +28,6 @@ class CategoryControllerTest extends TestCase
             ->assertJson([$this->category->toArray()]);
     }
 
-    public function testShow()
-    {
-        $response = $this->get(route('categories.show', ['category' => $this->category->id]));
-        $response
-            ->assertStatus(200)
-            ->assertJson($this->category->toArray());
-    }
-
     public function testInvalidationData()
     {
         $data = [
@@ -71,6 +63,14 @@ class CategoryControllerTest extends TestCase
             'is_active' => false
         ];
         $this->assertStore($data, $data + ['description' => 'description', 'is_active' => false]);
+    }
+
+    public function testShow()
+    {
+        $response = $this->get(route('categories.show', ['category' => $this->category->id]));
+        $response
+            ->assertStatus(200)
+            ->assertJson($this->category->toArray());
     }
 
     public function testUpdate()
