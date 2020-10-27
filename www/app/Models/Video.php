@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Uuid;
 
-class Genre extends Model
+class Video extends Model
 {
     use SoftDeletes, Uuid;
 
+    const RATING_LIST = ['L', '12', '14', '16', '18'];
+
     protected $fillable = [
-        'name', 'is_active'
+        'title', 'description', 'year_launched',
+        'opened', 'rating', 'duration'
     ];
 
     protected $dates = [
@@ -19,7 +22,9 @@ class Genre extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'opened' => 'boolean',
+        'year_launched' => 'integer',
+        'duration' => 'integer'
     ];
 
     protected $keyType = 'string';

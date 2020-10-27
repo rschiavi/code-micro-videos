@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Genre;
 
 class GenresTableSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Genre::class, 10)->create();
+        factory(Genre::class, 10)->create();
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\CastMember;
+use App\Models\Video;
 
-class CastMembersTableSeeder extends Seeder
+class VideosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class CastMembersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(CastMember::class, 100)->create();
+        factory(Video::class, 100)->create();
     }
 }

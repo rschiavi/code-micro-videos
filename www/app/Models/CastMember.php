@@ -13,19 +13,19 @@ class CastMember extends Model
     const TYPE_DIRECTOR = 1;
     const TYPE_ACTOR = 2;
 
-    public $fillable = [
+    protected $fillable = [
         'name', 'type'
     ];
 
-    public $dates = [
+    protected $dates = [
         'deleted_at'
     ];
 
-    public $casts = [
+    protected $casts = [
         'type' => 'integer'
     ];
 
-    public $incrementing = false;
+    protected $keyType = 'string';
 
-    public $keyType = 'string';
+    public $incrementing = false;
 }
