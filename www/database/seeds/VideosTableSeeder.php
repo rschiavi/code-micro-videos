@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Genre;
+use App\Models\Video;
 
-class GenresTableSeeder extends Seeder
+class VideosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Genre::class, 10)->create();
+        factory(Video::class, 100)->create();
     }
 }

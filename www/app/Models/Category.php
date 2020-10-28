@@ -10,19 +10,19 @@ class Category extends Model
 {
     use SoftDeletes, Uuid;
 
-    public $fillable = [
+    protected $fillable = [
         'name', 'description', 'is_active'
     ];
 
-    public $dates = [
+    protected $dates = [
         'deleted_at'
     ];
 
-    public $casts = [
+    protected $casts = [
         'is_active' => 'boolean'
     ];
 
-    public $incrementing = false;
+    protected $keyType = 'string';
 
-    public $keyType = 'string';
+    public $incrementing = false;
 }

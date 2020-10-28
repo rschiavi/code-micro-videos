@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Uuid;
 
-class Genre extends Model
+class CastMember extends Model
 {
     use SoftDeletes, Uuid;
 
+    const TYPE_DIRECTOR = 1;
+    const TYPE_ACTOR = 2;
+
     protected $fillable = [
-        'name', 'is_active'
+        'name', 'type'
     ];
 
     protected $dates = [
@@ -19,7 +22,7 @@ class Genre extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'type' => 'integer'
     ];
 
     protected $keyType = 'string';
